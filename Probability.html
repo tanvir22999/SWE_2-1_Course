@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus: Probability &amp; Probability Distributions</title>
+    <style>
+        :root {
+            --bg-dark: #070a13;
+            --card-bg: #111827;
+            --card-hover-border: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #64748b;
+
+            /* Mathematical domain color accents */
+            --clr-foundations: #06b6d4;
+            /* Cyber Cyan */
+            --clr-theorems: #f59e0b;
+            /* Probability Amber */
+            --clr-variables: #f43f5e;
+            /* Variable Rose */
+            --clr-discrete: #10b981;
+            /* Discrete Green */
+            --clr-continuous: #a855f7;
+            /* Continuous Purple */
+            --clr-bivariate: #38bdf8;
+            /* Bivariate Sky Blue */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 5rem;
+        }
+
+        /* Ambient glowing background header mesh */
+        header {
+            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #030712 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #1e293b;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, var(--clr-foundations), var(--clr-variables), var(--clr-continuous));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sticky Navigation Architecture */
+        nav {
+            background-color: rgba(7, 10, 19, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid #1e293b;
+            padding: 0.85rem 1rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.65rem;
+        }
+
+        .nav-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: #1e293b;
+        }
+
+        /* Nav Accent Bindings */
+        .n-fd {
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .n-th {
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .n-vr {
+            border-color: rgba(244, 63, 94, 0.3);
+        }
+
+        .n-dd {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .n-cd {
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .n-bv {
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        /* Core System Grid Display */
+        .main-container {
+            max-width: 1400px;
+            margin: 3rem auto 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 540px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Course Segment Cards */
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 2.2rem;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            scroll-margin-top: 5.5rem;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-hover-border);
+        }
+
+        /* Headings Configuration */
+        .section-card h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Dynamic Custom Color Card Injectors */
+        .card-foundations h2 {
+            color: var(--clr-foundations);
+            border-bottom-color: rgba(6, 182, 212, 0.15);
+        }
+
+        .card-theorems h2 {
+            color: var(--clr-theorems);
+            border-bottom-color: rgba(245, 158, 11, 0.15);
+        }
+
+        .card-variables h2 {
+            color: var(--clr-variables);
+            border-bottom-color: rgba(244, 63, 94, 0.15);
+        }
+
+        .card-discrete h2 {
+            color: var(--clr-discrete);
+            border-bottom-color: rgba(16, 185, 129, 0.15);
+        }
+
+        .card-continuous h2 {
+            color: var(--clr-continuous);
+            border-bottom-color: rgba(168, 85, 247, 0.15);
+        }
+
+        .card-bivariate h2 {
+            color: var(--clr-bivariate);
+            border-bottom-color: rgba(56, 189, 248, 0.15);
+        }
+
+        /* Box Glow Enhancements on Card Hover state */
+        .card-foundations:hover {
+            box-shadow: 0 15px 35px -10px rgba(6, 182, 212, 0.2);
+        }
+
+        .card-theorems:hover {
+            box-shadow: 0 15px 35px -10px rgba(245, 158, 11, 0.2);
+        }
+
+        .card-variables:hover {
+            box-shadow: 0 15px 35px -10px rgba(244, 63, 94, 0.2);
+        }
+
+        .card-discrete:hover {
+            box-shadow: 0 15px 35px -10px rgba(16, 185, 129, 0.2);
+        }
+
+        .card-continuous:hover {
+            box-shadow: 0 15px 35px -10px rgba(168, 85, 247, 0.2);
+        }
+
+        .card-bivariate:hover {
+            box-shadow: 0 15px 35px -10px rgba(56, 189, 248, 0.2);
+        }
+
+        /* Layout Elements Group Wrapper */
+        .topic-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        /* Microchip Pills */
+        .topic-pill {
+            background-color: var(--bg-dark);
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            cursor: default;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Microchip Hover Action Listeners */
+        .card-foundations .topic-pill:hover {
+            border-color: var(--clr-foundations);
+            color: #fff;
+            background: rgba(6, 182, 212, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-theorems .topic-pill:hover {
+            border-color: var(--clr-theorems);
+            color: #fff;
+            background: rgba(245, 158, 11, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-variables .topic-pill:hover {
+            border-color: var(--clr-variables);
+            color: #fff;
+            background: rgba(244, 63, 94, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-discrete .topic-pill:hover {
+            border-color: var(--clr-discrete);
+            color: #fff;
+            background: rgba(16, 185, 129, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-continuous .topic-pill:hover {
+            border-color: var(--clr-continuous);
+            color: #fff;
+            background: rgba(168, 85, 247, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-bivariate .topic-pill:hover {
+            border-color: var(--clr-bivariate);
+            color: #fff;
+            background: rgba(56, 189, 248, 0.04);
+            transform: scale(1.02);
+        }
+
+        /* Meta metric tracker label badge configuration */
+        .meta-counter {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            background: #070a13;
+            border-radius: 20px;
+            color: #94a3b8;
+            border: 1px solid #1e293b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Probability &amp; Probability Distributions</h1>
+        <p>Axiomatic Foundations, Conditional Theorems, Random Variable Functions, and Univariate &amp; Bivariate
+            Distribution Models</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#foundations" class="nav-link n-fd">1. Set Foundations</a>
+            <a href="#theorems" class="nav-link n-th">2. Compound Laws</a>
+            <a href="#variables" class="nav-link n-vr">3. Random Variables</a>
+            <a href="#discrete" class="nav-link n-dd">4. Discrete Universes</a>
+            <a href="#continuous" class="nav-link n-cd">5. Continuous Domains</a>
+            <a href="#bivariate" class="nav-link n-bv">6. Bivariate Systems</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+
+        <section id="foundations" class="section-card card-foundations">
+            <h2>Probability Foundations <span class="meta-counter">7 Key Modules</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Random Experiments Architecture</div>
+                <div class="topic-pill">Sample Spaces (&Omega;) Maps</div>
+                <div class="topic-pill">Event Set Classifications</div>
+                <div class="topic-pill">Union and Intersection of Events</div>
+                <div class="topic-pill">Mutually Exclusive &amp; Independent Types</div>
+                <div class="topic-pill">Axiomatic Development of Probability</div>
+                <div class="topic-pill">Combinatorial Computation of Probability</div>
+            </div>
+        </section>
+
+        <section id="theorems" class="section-card card-theorems">
+            <h2>Laws &amp; Conditional Theorems <span class="meta-counter">5 Frameworks</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Theorem of Total Probability</div>
+                <div class="topic-pill">Compound Probability Multiplication Laws</div>
+                <div class="topic-pill">Conditional Probability P(A|B)</div>
+                <div class="topic-pill">Bayes’ Theorem (Prior &amp; Posterior Updates)</div>
+                <div class="topic-pill">Independent Event Multiplications</div>
+            </div>
+        </section>
+
+        <section id="variables" class="section-card card-variables">
+            <h2>Random Variables &amp; Moments <span class="meta-counter">11 Core Concepts</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Random Variables Definition</div>
+                <div class="topic-pill">Probability Mass &amp; Density Functions</div>
+                <div class="topic-pill">Cumulative Distribution Function (CDF)</div>
+                <div class="topic-pill">Joint Distribution Functions</div>
+                <div class="topic-pill">Marginal Probability Functions</div>
+                <div class="topic-pill">Conditional Probability Functions</div>
+                <div class="topic-pill">Mathematical Expectation Foundations</div>
+                <div class="topic-pill">Expectations of Sum and Product [E(X+Y)]</div>
+                <div class="topic-pill">Conditional Expectation &amp; Conditional Variance</div>
+                <div class="topic-pill">Moments &amp; Moment Generating Functions (MGF)</div>
+                <div class="topic-pill">Characteristic Functions (&phi;(t))</div>
+            </div>
+        </section>
+
+        <section id="discrete" class="section-card card-discrete">
+            <h2>Discrete Distributions <span class="meta-counter">9 Models</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Bernoulli Trial Implementations</div>
+                <div class="topic-pill">Binomial Distribution Framework</div>
+                <div class="topic-pill">Poisson Distribution (Rare Event Limits)</div>
+                <div class="topic-pill">Geometric Distribution (First Success)</div>
+                <div class="topic-pill">Hypergeometric Dependent Sampling</div>
+                <div class="topic-pill">Negative Binomial Framework</div>
+                <div class="topic-pill">Multinomial Generalization Sets</div>
+                <div class="topic-pill">Logarithmic Distribution Ideas</div>
+                <div class="topic-pill">Beta Binomial Distribution Models</div>
+            </div>
+        </section>
+
+        <section id="continuous" class="section-card card-continuous">
+            <h2>Continuous Distributions <span class="meta-counter">8 Profiles</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Continuous Uniform Distribution</div>
+                <div class="topic-pill">Exponential Distribution (Memoryless States)</div>
+                <div class="topic-pill">Weibull Reliability Engineering Models</div>
+                <div class="topic-pill">Gamma Distribution Functions</div>
+                <div class="topic-pill">Beta Distribution (First &amp; Second Kind)</div>
+                <div class="topic-pill">Normal / Gaussian Bell Curve Architecture</div>
+                <div class="topic-pill">Log Normal Transformation Curves</div>
+                <div class="topic-pill">Cauchy Heavy-Tailed Distribution Bounds</div>
+            </div>
+        </section>
+
+        <section id="bivariate" class="section-card card-bivariate">
+            <h2>Bivariate Distributions <span class="meta-counter">6 Frameworks</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Elementary Bivariate Concepts</div>
+                <div class="topic-pill">Bivariate Binomial Relationships</div>
+                <div class="topic-pill">Bivariate Poisson Structures</div>
+                <div class="topic-pill">Bivariate Geometric Modeling</div>
+                <div class="topic-pill">Bivariate Normal Joint Planes</div>
+                <div class="topic-pill">Bivariate Gamma &amp; Beta Surfaces</div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+</html>

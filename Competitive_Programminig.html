@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus: Introduction to Competitive Programming</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+
+            /* Domain-specific color coding */
+            --color-ds: #38bdf8;
+            /* Light Blue */
+            --color-string: #f43f5e;
+            /* Rose */
+            --color-game: #10b981;
+            /* Emerald */
+            --color-comb: #a855f7;
+            /* Purple */
+            --color-nt: #eab308;
+            /* Yellow */
+            --color-math: #6366f1;
+            /* Indigo */
+            --color-geom: #06b6d4;
+            /* Cyan */
+            --color-dp: #f97316;
+            /* Orange */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 5rem;
+        }
+
+        /* Hero Header banner */
+        header {
+            position: relative;
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 60%);
+            z-index: 0;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, #38bdf8, #a855f7, #f43f5e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Quick Navigation Bar */
+        nav {
+            background-color: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid #334155;
+            padding: 0.75rem 1rem;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: #334155;
+        }
+
+        /* Color configurations for nav tags */
+        .n-ds {
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .n-str {
+            border-color: rgba(244, 63, 94, 0.4);
+        }
+
+        .n-game {
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .n-comb {
+            border-color: rgba(168, 85, 247, 0.4);
+        }
+
+        .n-nt {
+            border-color: rgba(234, 179, 8, 0.4);
+        }
+
+        .n-math {
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .n-geom {
+            border-color: rgba(6, 182, 212, 0.4);
+        }
+
+        .n-dp {
+            border-color: rgba(249, 115, 22, 0.4);
+        }
+
+        /* Main layout container */
+        .main-container {
+            max-width: 1300px;
+            margin: 3rem auto 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Domain Module Cards */
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            scroll-margin-top: 5rem;
+        }
+
+        .section-card:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Individual Card Headings mapped to domain variables */
+        .section-card h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #334155;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Card dynamic accents via custom classes */
+        .ds-card h2 {
+            color: var(--color-ds);
+            border-bottom-color: rgba(56, 189, 248, 0.2);
+        }
+
+        .str-card h2 {
+            color: var(--color-string);
+            border-bottom-color: rgba(244, 63, 94, 0.2);
+        }
+
+        .game-card h2 {
+            color: var(--color-game);
+            border-bottom-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .comb-card h2 {
+            color: var(--color-comb);
+            border-bottom-color: rgba(168, 85, 247, 0.2);
+        }
+
+        .nt-card h2 {
+            color: var(--color-nt);
+            border-bottom-color: rgba(234, 179, 8, 0.2);
+        }
+
+        .math-card h2 {
+            color: var(--color-math);
+            border-bottom-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .geom-card h2 {
+            color: var(--color-geom);
+            border-bottom-color: rgba(6, 182, 212, 0.2);
+        }
+
+        .dp-card h2 {
+            color: var(--color-dp);
+            border-bottom-color: rgba(249, 115, 22, 0.2);
+        }
+
+        .ds-card:hover {
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
+        }
+
+        .str-card:hover {
+            box-shadow: 0 10px 30px -10px rgba(244, 63, 94, 0.3);
+        }
+
+        .game-card:hover {
+            box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.3);
+        }
+
+        .comb-card:hover {
+            box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.3);
+        }
+
+        .nt-card:hover {
+            box-shadow: 0 10px 30px -10px rgba(234, 179, 8, 0.3);
+        }
+
+        .math-card:hover {
+            box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.3);
+        }
+
+        .geom-card:hover {
+            box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.3);
+        }
+
+        .dp-card:hover {
+            box-shadow: 0 10px 30px -10px rgba(249, 115, 22, 0.3);
+        }
+
+        /* Topics internal grouping flexbox */
+        .topic-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        /* Interactive micro-pills */
+        .topic-pill {
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        /* Hover styles scoped to their respective domains */
+        .ds-card .topic-pill:hover {
+            border-color: var(--color-ds);
+            color: white;
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .str-card .topic-pill:hover {
+            border-color: var(--color-string);
+            color: white;
+            background: rgba(244, 63, 94, 0.05);
+        }
+
+        .game-card .topic-pill:hover {
+            border-color: var(--color-game);
+            color: white;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .comb-card .topic-pill:hover {
+            border-color: var(--color-comb);
+            color: white;
+            background: rgba(168, 85, 247, 0.05);
+        }
+
+        .nt-card .topic-pill:hover {
+            border-color: var(--color-nt);
+            color: white;
+            background: rgba(234, 179, 8, 0.05);
+        }
+
+        .math-card .topic-pill:hover {
+            border-color: var(--color-math);
+            color: white;
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .geom-card .topic-pill:hover {
+            border-color: var(--color-geom);
+            color: white;
+            background: rgba(6, 182, 212, 0.05);
+        }
+
+        .dp-card .topic-pill:hover {
+            border-color: var(--color-dp);
+            color: white;
+            background: rgba(249, 115, 22, 0.05);
+        }
+
+        /* Custom Badge Counters */
+        .count-badge {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            background: #0f172a;
+            border-radius: 20px;
+            color: var(--text-muted);
+            border: 1px solid #334155;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Introduction to Competitive Programming</h1>
+        <p>Master Advanced Algorithms and Specialized Complex Data Structures</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#ds" class="nav-link n-ds">Data Structures</a>
+            <a href="#strings" class="nav-link n-str">String Processing</a>
+            <a href="#game" class="nav-link n-game">Game Theory</a>
+            <a href="#combinatorics" class="nav-link n-comb">Combinatorics & Prob</a>
+            <a href="#nt" class="nav-link n-nt">Number Theory</a>
+            <a href="#math" class="nav-link n-math">Basic Math</a>
+            <a href="#geometry" class="nav-link n-geom">Basic Geometry</a>
+            <a href="#dp" class="nav-link n-dp">Dynamic Programming</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+
+        <section id="ds" class="section-card ds-card">
+            <h2>Data Structures <span class="count-badge">14 Topics</span></h2>
+            <div class="topic-container">
+                <div class="topic-pill">Trie Tree</div>
+                <div class="topic-pill">BIT (Binary Indexed Tree)</div>
+                <div class="topic-pill">Segment Tree</div>
+                <div class="topic-pill">Splay Tree</div>
+                <div class="topic-pill">MO’s Algorithm</div>
+                <div class="topic-pill">Square Root Decomposition</div>
+                <div class="topic-pill">Heavy Light Decomposition</div>
+                <div class="topic-pill">Persistent Segment Tree</div>
+                <div class="topic-pill">Persistent Trie</div>
+                <div class="topic-pill">DSU on Tree</div>
+                <div class="topic-pill">Treap</div>
+                <div class="topic-pill">K-D Tree</div>
+                <div class="topic-pill">KNN Tree</div>
+                <div class="topic-pill">Sparse Table</div>
+            </div>
+        </section>
+
+        <section id="strings" class="section-card str-card">
+            <h2>String Processing <span class="count-badge">9 Topics</span></h2>
+            <div class="topic-container">
+                <div class="topic-pill">KMP Algorithm</div>
+                <div class="topic-pill">Suffix Array</div>
+                <div class="topic-pill">Suffix Automata</div>
+                <div class="topic-pill">Suffix Tree</div>
+                <div class="topic-pill">Palindromic Tree</div>
+                <div class="topic-pill">Aho-Corasick</div>
+                <div class="topic-pill">Manacher Algorithm</div>
+                <div class="topic-pill">Extended KMP</div>
+                <div class="topic-pill">Hashing (Rolling Hash)</div>
+            </div>
+        </section>
+
+        <section id="game" class="section-card game-card">
+            <h2>Game Theory <span class="count-badge">7 Topics</span></h2>
+            <div class="topic-container">
+                <div class="topic-pill">Nim Game</div>
+                <div class="topic-pill">Sprague-Grundy Value</div>
+                <div class="topic-pill">Green Hackenbush</div>
+                <div class="topic-pill">Blue Red Hackenbush</div>
+                <div class="topic-pill">Blue Red Green Hackenbush</div>
+                <div class="topic-pill">Colon Principle</div>
+                <div class="topic-pill">Fusion Principle</div>
+            </div>
+        </section>
+
+        <section id="combinatorics" class="section-card comb-card">
+            <h2>Combinatorics & Probability <span class="count-badge">8 Topics</span></h2>
+            <div class="topic-container">
+                <div class="topic-pill">Burnside Lemma</div>
+                <div class="topic-pill">Inclusion Exclusion</div>
+                <div class="topic-pill">Combination</div>
+                <div class="topic-pill">Permutation</div>
+                <div class="topic-pill">Catalan Number</div>
+                <div class="topic-pill">Stirling Number</div>
+                <div class="topic-pill">Probability</div>
+                <div class="topic-pill">Expected Value</div>
+            </div>
+        </section>
+
+        <section id="nt" class="section-card nt-card">
+            <h2>Number Theory <span class="count-badge">7 Topics</span></h2>
+            <div class="topic-container">
+                <div class="topic-pill">Chinese Remainder Theorem</div>
+                <div class="topic-pill">Euler Phi</div>
+                <div class="topic-pill">Extended Euclid</div>
+                <div class="topic-pill">Prime Factorization</div>
+                <div class="topic-pill">Mobius Function</div>
+                <div class="topic-pill">Primitive Prime</div>
+                <div class="topic-pill">Huge Mod</div>
+            </div>
+        </section>
+
+        <section id="math" class="section-card math-card">
+            <h2>Basic Math <span class="count-badge">5 Topics</span></h2>
+            <div class="topic-container">
+                <div class="topic-pill">FFT (Fast Fourier Transform)</div>
+                <div class="topic-pill">DFT (Discrete Fourier Transform)</div>
+                <div class="topic-pill">NTT (Number Theoretic Transform)</div>
+                <div class="topic-pill">Gaussian Elimination</div>
+                <div class="topic-pill">Matrix Exponentiation</div>
+            </div>
+        </section>
+
+        <section id="geometry" class="section-card geom-card">
+            <h2>Basic Geometry <span class="count-badge">8 Topics</span></h2>
+            <div class="topic-container">
+                <div class="topic-pill">Fundamental Concepts of Geometry</div>
+                <div class="topic-pill">Closest Pair of Point</div>
+                <div class="topic-pill">Convex Hull</div>
+                <div class="topic-pill">Rectangle Union</div>
+                <div class="topic-pill">Circle Union</div>
+                <div class="topic-pill">Polygon Clipping</div>
+                <div class="topic-pill">Line Sweep</div>
+                <div class="topic-pill">Line Intersection</div>
+            </div>
+        </section>
+
+        <section id="dp" class="section-card dp-card">
+            <h2>Dynamic Programming <span class="count-badge">5 Classifications</span></h2>
+            <div class="topic-container">
+                <div class="topic-pill">Coin Change Variations</div>
+                <div class="topic-pill">Knapsack Problems</div>
+                <div class="topic-pill">LIS (Longest Increasing Subsequence)</div>
+                <div class="topic-pill">LCS (Longest Common Subsequence)</div>
+                <div class="topic-pill">Edit Distance variations</div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus: Object Oriented Programming Language (Java)</title>
+    <style>
+        :root {
+            --bg-dark: #070a13;
+            --card-bg: #111827;
+            --card-hover-border: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #64748b;
+
+            /* High-vibrancy engineering accents mapped to Java Architecture */
+            --clr-basics: #06b6d4;
+            /* Cyber Cyan */
+            --clr-classes: #a855f7;
+            /* Tech Purple */
+            --clr-oop: #10b981;
+            /* Silicon Green */
+            --clr-exceptions: #f59e0b;
+            /* Warning Amber */
+            --clr-concurrency: #ec4899;
+            /* Thread Pink */
+            --clr-advanced: #6366f1;
+            /* Lambda Indigo */
+            --clr-utilities: #38bdf8;
+            /* Sky Blue */
+            --clr-gui: #f43f5e;
+            /* Event Rose */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 5rem;
+        }
+
+        /* Ambient glowing background header mesh */
+        header {
+            position: relative;
+            background: linear-gradient(135deg, #111827 0%, #030712 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #1e293b;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, var(--clr-basics), var(--clr-classes), var(--clr-concurrency));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sticky Navigation Architecture */
+        nav {
+            background-color: rgba(7, 10, 19, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid #1e293b;
+            padding: 0.85rem 1rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.65rem;
+        }
+
+        .nav-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: #1e293b;
+        }
+
+        /* Nav Accent Bindings */
+        .n-bs {
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .n-cl {
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .n-op {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .n-ex {
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .n-th {
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .n-ad {
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .n-ut {
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .n-gu {
+            border-color: rgba(244, 63, 94, 0.3);
+        }
+
+        /* Core System Grid Display */
+        .main-container {
+            max-width: 1400px;
+            margin: 3rem auto 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 540px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Course Segment Cards */
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 2.2rem;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            scroll-margin-top: 5.5rem;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-hover-border);
+        }
+
+        /* Headings Configuration */
+        .section-card h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Dynamic Custom Color Card Injectors */
+        .card-basics h2 {
+            color: var(--clr-basics);
+            border-bottom-color: rgba(6, 182, 212, 0.15);
+        }
+
+        .card-classes h2 {
+            color: var(--clr-classes);
+            border-bottom-color: rgba(168, 85, 247, 0.15);
+        }
+
+        .card-oop h2 {
+            color: var(--clr-oop);
+            border-bottom-color: rgba(16, 185, 129, 0.15);
+        }
+
+        .card-exceptions h2 {
+            color: var(--clr-exceptions);
+            border-bottom-color: rgba(245, 158, 11, 0.15);
+        }
+
+        .card-concurrency h2 {
+            color: var(--clr-concurrency);
+            border-bottom-color: rgba(236, 72, 153, 0.15);
+        }
+
+        .card-advanced h2 {
+            color: var(--clr-advanced);
+            border-bottom-color: rgba(99, 102, 241, 0.15);
+        }
+
+        .card-utilities h2 {
+            color: var(--clr-utilities);
+            border-bottom-color: rgba(56, 189, 248, 0.15);
+        }
+
+        .card-gui h2 {
+            color: var(--clr-gui);
+            border-bottom-color: rgba(244, 63, 94, 0.15);
+        }
+
+        /* Box Glow Enhancements on Card Hover state */
+        .card-basics:hover {
+            box-shadow: 0 15px 35px -10px rgba(6, 182, 212, 0.2);
+        }
+
+        .card-classes:hover {
+            box-shadow: 0 15px 35px -10px rgba(168, 85, 247, 0.2);
+        }
+
+        .card-oop:hover {
+            box-shadow: 0 15px 35px -10px rgba(16, 185, 129, 0.2);
+        }
+
+        .card-exceptions:hover {
+            box-shadow: 0 15px 35px -10px rgba(245, 158, 11, 0.2);
+        }
+
+        .card-concurrency:hover {
+            box-shadow: 0 15px 35px -10px rgba(236, 72, 153, 0.2);
+        }
+
+        .card-advanced:hover {
+            box-shadow: 0 15px 35px -10px rgba(99, 102, 241, 0.2);
+        }
+
+        .card-utilities:hover {
+            box-shadow: 0 15px 35px -10px rgba(56, 189, 248, 0.2);
+        }
+
+        .card-gui:hover {
+            box-shadow: 0 15px 35px -10px rgba(244, 63, 94, 0.2);
+        }
+
+        /* Layout Elements Group Wrapper */
+        .topic-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        /* Java Component Microchips */
+        .topic-pill {
+            background-color: var(--bg-dark);
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            cursor: default;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Microchip Hover Action Listeners */
+        .card-basics .topic-pill:hover {
+            border-color: var(--clr-basics);
+            color: #fff;
+            background: rgba(6, 182, 212, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-classes .topic-pill:hover {
+            border-color: var(--clr-classes);
+            color: #fff;
+            background: rgba(168, 85, 247, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-oop .topic-pill:hover {
+            border-color: var(--clr-oop);
+            color: #fff;
+            background: rgba(16, 185, 129, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-exceptions .topic-pill:hover {
+            border-color: var(--clr-exceptions);
+            color: #fff;
+            background: rgba(245, 158, 11, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-concurrency .topic-pill:hover {
+            border-color: var(--clr-concurrency);
+            color: #fff;
+            background: rgba(236, 72, 153, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-advanced .topic-pill:hover {
+            border-color: var(--clr-advanced);
+            color: #fff;
+            background: rgba(99, 102, 241, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-utilities .topic-pill:hover {
+            border-color: var(--clr-utilities);
+            color: #fff;
+            background: rgba(56, 189, 248, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-gui .topic-pill:hover {
+            border-color: var(--clr-gui);
+            color: #fff;
+            background: rgba(244, 63, 94, 0.04);
+            transform: scale(1.02);
+        }
+
+        /* Meta metric tracker label badge configuration */
+        .meta-counter {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            background: #070a13;
+            border-radius: 20px;
+            color: #94a3b8;
+            border: 1px solid #1e293b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Object-Oriented Programming Language</h1>
+        <p>Java Foundations, JVM Bytecode Architecture, Structured Polymorphism, Concurrent Engineering, Functional
+            Lambdas, and Dynamic UI Frameworks</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#basics" class="nav-link n-bs">1. Language Basics</a>
+            <a href="#classes" class="nav-link n-cl">2. Classes &amp; Methods</a>
+            <a href="#oop" class="nav-link n-op">3. OOP Pillars</a>
+            <a href="#exceptions" class="nav-link n-ex">4. Exceptions &amp; I/O</a>
+            <a href="#concurrency" class="nav-link n-th">5. Multithreading</a>
+            <a href="#advanced" class="nav-link n-ad">6. Lambdas &amp; Generics</a>
+            <a href="#utilities" class="nav-link n-ut">7. Strings &amp; Collections</a>
+            <a href="#gui" class="nav-link n-gu">8. GUI &amp; Events</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+
+        <section id="basics" class="section-card card-basics">
+            <h2>Language Basics &amp; Controls <span class="meta-counter">21 Topics</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">History of Java</div>
+                <div class="topic-pill">Java Class Libraries</div>
+                <div class="topic-pill">Introduction to Java Programming</div>
+                <div class="topic-pill">Java JVM Bytecode Mechanics</div>
+                <div class="topic-pill">Strongly Typed Language Paradigms</div>
+                <div class="topic-pill">Primitive Types &amp; Memory Footprints</div>
+                <div class="topic-pill">Literals &amp; Constants</div>
+                <div class="topic-pill">Variable Declarations</div>
+                <div class="topic-pill">Type Conversion &amp; Explicit Casting</div>
+                <div class="topic-pill">Multi-Dimensional Arrays</div>
+                <div class="topic-pill">Arithmetic Operators</div>
+                <div class="topic-pill">Bitwise Logical Operators</div>
+                <div class="topic-pill">Relational &amp; Comparison Operators</div>
+                <div class="topic-pill">Boolean Logical Operators</div>
+                <div class="topic-pill">Assignment &amp; Ternary (?) Operators</div>
+                <div class="topic-pill">Operator Precedence Evaluation</div>
+                <div class="topic-pill">Selection Statements (if &amp; switch)</div>
+                <div class="topic-pill">Iteration Loops (while &amp; do-while)</div>
+                <div class="topic-pill">for &amp; for-each Enhanced Loops</div>
+                <div class="topic-pill">Nested Loop Structuring</div>
+                <div class="topic-pill">Jump Control Statements (break, continue, return)</div>
+            </div>
+        </section>
+
+        <section id="classes" class="section-card card-classes">
+            <h2>Classes, Objects &amp; Methods <span class="meta-counter">16 Topics</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Class Fundamentals &amp; State Definitions</div>
+                <div class="topic-pill">Declaring Objects &amp; Instantiation</div>
+                <div class="topic-pill">Assigning Object Reference Variables</div>
+                <div class="topic-pill">Introducing Methods &amp; Signatures</div>
+                <div class="topic-pill">Parameterized Constructors</div>
+                <div class="topic-pill">The 'this' Reference Pointer</div>
+                <div class="topic-pill">Automatic Garbage Collection Mechanics</div>
+                <div class="topic-pill">Compile-time Method Overloading</div>
+                <div class="topic-pill">Using Objects as Parameters</div>
+                <div class="topic-pill">Call-by-Value vs Call-by-Reference</div>
+                <div class="topic-pill">Returning Class Objects</div>
+                <div class="topic-pill">Recursion Execution Stack</div>
+                <div class="topic-pill">Access Control (Encapsulation Guarding)</div>
+                <div class="topic-pill">Understanding static Members</div>
+                <div class="topic-pill">final Mutability Restrictors</div>
+                <div class="topic-pill">Nested &amp; Inner Classes</div>
+            </div>
+        </section>
+
+        <section id="oop" class="section-card card-oop">
+            <h2>OOP Core, Packages &amp; Interfaces <span class="meta-counter">16 Topics</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Inheritance Basics (Extending States)</div>
+                <div class="topic-pill">Using the 'super' Keyword</div>
+                <div class="topic-pill">Creating a Multilevel Hierarchy</div>
+                <div class="topic-pill">Runtime Method Overriding</div>
+                <div class="topic-pill">Dynamic Method Dispatch (Polymorphism)</div>
+                <div class="topic-pill">Abstract Classes &amp; Structural Contracts</div>
+                <div class="topic-pill">final Class Customization Limits</div>
+                <div class="topic-pill">Local Variable Type Inference in Hierarchies</div>
+                <div class="topic-pill">The Root 'Object' Class Methods</div>
+                <div class="topic-pill">Packages and Member Access Rules</div>
+                <div class="topic-pill">Importing Packages and Sub-packages</div>
+                <div class="topic-pill">Interfaces Core Specifications</div>
+                <div class="topic-pill">Default Interface Methods Implementation</div>
+                <div class="topic-pill">Static Methods in Interfaces</div>
+                <div class="topic-pill">Private Interface Structural Methods</div>
+                <div class="topic-pill">Command-Line &amp; Varargs Arguments</div>
+            </div>
+        </section>
+
+        <section id="exceptions" class="section-card card-exceptions">
+            <h2>Exception Architecture &amp; Data Streams <span class="meta-counter">15 Topics</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Exception-Handling Fundamentals</div>
+                <div class="topic-pill">Checked vs Unchecked Exception Types</div>
+                <div class="topic-pill">Uncaught Runtime Exceptions handling</div>
+                <div class="topic-pill">Using try and catch blocks</div>
+                <div class="topic-pill">Multiple catch Clauses Resolution</div>
+                <div class="topic-pill">Nested try Frameworks</div>
+                <div class="topic-pill">Explicit throw Statements</div>
+                <div class="topic-pill">Method throws Declarations Clause</div>
+                <div class="topic-pill">The mandatory finally Block execution</div>
+                <div class="topic-pill">Java Built-in Exceptions Map</div>
+                <div class="topic-pill">Creating Your Own Exception Subclasses</div>
+                <div class="topic-pill">Chained Exceptions Handling</div>
+                <div class="topic-pill">I/O Basics &amp; Streams Concept</div>
+                <div class="topic-pill">Console Input / Output Interfacing</div>
+                <div class="topic-pill">Object Serialization &amp; Deserialization</div>
+            </div>
+        </section>
+
+        <section id="concurrency" class="section-card card-concurrency">
+            <h2>Multithreaded Concurrent Systems <span class="meta-counter">11 Focuses</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">The Java Thread Model Architecture</div>
+                <div class="topic-pill">The Main Application Thread</div>
+                <div class="topic-pill">Creating Threads (Runnable vs Thread Class)</div>
+                <div class="topic-pill">Creating Multiple Concurrent Threads</div>
+                <div class="topic-pill">Using isAlive() and join() Sync Methods</div>
+                <div class="topic-pill">Thread Priorities Management</div>
+                <div class="topic-pill">Synchronization (Blocks &amp; Synchronized Methods)</div>
+                <div class="topic-pill">Interthread Communication (wait, notify, notifyAll)</div>
+                <div class="topic-pill">Suspending, Resuming, and Stopping Threads</div>
+                <div class="topic-pill">Obtaining Dynamic Thread States</div>
+                <div class="topic-pill">Asynchronous Multithreading Optimization</div>
+            </div>
+        </section>
+
+        <section id="advanced" class="section-card card-advanced">
+            <h2>Generics, Functional Lambdas &amp; Modules <span class="meta-counter">18 Topics</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">A Simple Generics Example Architecture</div>
+                <div class="topic-pill">The General Form of a Generic Class</div>
+                <div class="topic-pill">Bounded Type Parameters (&lt;T extends Class&gt;)</div>
+                <div class="topic-pill">Wildcard Arguments (? Extends / Super)</div>
+                <div class="topic-pill">Generic Interfaces Specifications</div>
+                <div class="topic-pill">Generic Class Hierarchies Subtyping</div>
+                <div class="topic-pill">Introducing Lambda Expressions Syntax</div>
+                <div class="topic-pill">Block Lambda Expressions Layout</div>
+                <div class="topic-pill">Passing Lambda Expressions as Arguments</div>
+                <div class="topic-pill">Java Platform Module System Basics</div>
+                <div class="topic-pill">Legacy Code Integration &amp; Unnamed Modules</div>
+                <div class="topic-pill">Targeted Exports to Specific Modules</div>
+                <div class="topic-pill">Module Dependency Graphs Rendering</div>
+                <div class="topic-pill">Record Basics (Data-centric Classes)</div>
+                <div class="topic-pill">Text Blocks (Multi-line String Formats)</div>
+                <div class="topic-pill">Sealed Classes &amp; Explicit Extensions</div>
+                <div class="topic-pill">Sealed Interfaces Contracts</div>
+                <div class="topic-pill">Enumeration Fundamentals &amp; Type Wrappers</div>
+            </div>
+        </section>
+
+        <section id="utilities" class="section-card card-utilities">
+            <h2>Strings, Collections &amp; Utilities <span class="meta-counter">16 Structures</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">The String Constructors Allocation</div>
+                <div class="topic-pill">String Operations and Immutability</div>
+                <div class="topic-pill">String Methods API Reference</div>
+                <div class="topic-pill">StringBuffer Dynamic Classes</div>
+                <div class="topic-pill">StringBuilder Unsynchronized Sequences</div>
+                <div class="topic-pill">Collection Framework Core Interfaces</div>
+                <div class="topic-pill">Concrete Collection Classes (List, Set)</div>
+                <div class="topic-pill">Spliterators Parallel Data Traversals</div>
+                <div class="topic-pill">Working with Maps (Key-Value Keyways)</div>
+                <div class="topic-pill">The Collection Algorithms (Sorting, Searching)</div>
+                <div class="topic-pill">StringTokenizer Parsing Tool</div>
+                <div class="topic-pill">Date &amp; Time Tracking Subsystem</div>
+                <div class="topic-pill">Formatter Output Systems</div>
+                <div class="topic-pill">Scanner Stream Parsing Utility</div>
+                <div class="topic-pill">The Core Base I/O Classes and Interfaces</div>
+                <div class="topic-pill">I/O Native Exception Management</div>
+            </div>
+        </section>
+
+        <section id="gui" class="section-card card-gui">
+            <h2>Event Subsystems &amp; GUI Layouts <span class="meta-counter">14 UI Blocks</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Event Handling Mechanisms</div>
+                <div class="topic-pill">Delegation Event Model Architecture</div>
+                <div class="topic-pill">Event Classes Hierarchy</div>
+                <div class="topic-pill">Event Listener Interfaces Registry</div>
+                <div class="topic-pill">Adapter Classes (Skeletal Listeners)</div>
+                <div class="topic-pill">Abstract Window Toolkit (AWT) Classes</div>
+                <div class="topic-pill">Window Fundamentals &amp; Coordinate Systems</div>
+                <div class="topic-pill">AWT Basic Control Components</div>
+                <div class="topic-pill">The Origins &amp; Concepts of Swing</div>
+                <div class="topic-pill">Swing High-Level Features &amp; Pluggable Look</div>
+                <div class="topic-pill">Components and Containers Architecture</div>
+                <div class="topic-pill">Swing Packages Map</div>
+                <div class="topic-pill">Custom Painting in Swing (paintComponent)</div>
+                <div class="topic-pill">Swing Menus and Action Items Design</div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+</html>

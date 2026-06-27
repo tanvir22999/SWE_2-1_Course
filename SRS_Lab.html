@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus: Software Requirement Engineering Lab</title>
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --card-bg: #131b2e;
+            --card-hover-border: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #64748b;
+
+            /* Lab-centric dynamic color accents */
+            --clr-elicitation: #38bdf8;
+            /* Electric Sky Blue */
+            --clr-specification: #a855f7;
+            /* High-Volt Purple */
+            --clr-validation: #f43f5e;
+            /* Crimson Rose */
+            --clr-management: #10b981;
+            /* Jade Green */
+            --clr-modeling: #f97316;
+            /* Sunset Orange */
+            --clr-tools: #06b6d4;
+            /* Cyber Cyan */
+            --clr-agile: #eab308;
+            /* Tech Amber */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 5rem;
+        }
+
+        /* Ambient subtle gradient header mesh */
+        header {
+            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #06090f 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #1e293b;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.07) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, var(--clr-elicitation), var(--clr-specification), var(--clr-tools));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sticky Navigation Bar */
+        nav {
+            background-color: rgba(9, 13, 22, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid #1e293b;
+            padding: 0.85rem 1rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.65rem;
+        }
+
+        .nav-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: #1e293b;
+        }
+
+        /* Dynamic Nav Border Maps */
+        .n-el {
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .n-sp {
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .n-va {
+            border-color: rgba(244, 63, 94, 0.3);
+        }
+
+        .n-mn {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .n-mo {
+            border-color: rgba(249, 115, 22, 0.3);
+        }
+
+        .n-tl {
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .n-ag {
+            border-color: rgba(234, 179, 8, 0.3);
+        }
+
+        /* Multi-column grid container layout */
+        .main-container {
+            max-width: 1400px;
+            margin: 3rem auto 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 540px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2.1rem;
+            }
+        }
+
+        /* Lab Component Module Cards */
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 2.2rem;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            scroll-margin-top: 5.5rem;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-hover-border);
+        }
+
+        /* Typography Styling Inside Header Card */
+        .section-card h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Individual Card Top Borders and Text Color Mappings */
+        .card-el h2 {
+            color: var(--clr-elicitation);
+            border-bottom-color: rgba(56, 189, 248, 0.15);
+        }
+
+        .card-sp h2 {
+            color: var(--clr-specification);
+            border-bottom-color: rgba(168, 85, 247, 0.15);
+        }
+
+        .card-va h2 {
+            color: var(--clr-validation);
+            border-bottom-color: rgba(244, 63, 94, 0.15);
+        }
+
+        .card-mn h2 {
+            color: var(--clr-management);
+            border-bottom-color: rgba(16, 185, 129, 0.15);
+        }
+
+        .card-mo h2 {
+            color: var(--clr-modeling);
+            border-bottom-color: rgba(249, 115, 22, 0.15);
+        }
+
+        .card-tl h2 {
+            color: var(--clr-tools);
+            border-bottom-color: rgba(6, 182, 212, 0.15);
+        }
+
+        .card-ag h2 {
+            color: var(--clr-agile);
+            border-bottom-color: rgba(234, 179, 8, 0.15);
+        }
+
+        /* Floating Shadow Glow Accents on Card Hover */
+        .card-el:hover {
+            box-shadow: 0 15px 35px -10px rgba(56, 189, 248, 0.2);
+        }
+
+        .card-sp:hover {
+            box-shadow: 0 15px 35px -10px rgba(168, 85, 247, 0.2);
+        }
+
+        .card-va:hover {
+            box-shadow: 0 15px 35px -10px rgba(244, 63, 94, 0.2);
+        }
+
+        .card-mn:hover {
+            box-shadow: 0 15px 35px -10px rgba(16, 185, 129, 0.2);
+        }
+
+        .card-mo:hover {
+            box-shadow: 0 15px 35px -10px rgba(249, 115, 22, 0.2);
+        }
+
+        .card-tl:hover {
+            box-shadow: 0 15px 35px -10px rgba(6, 182, 212, 0.2);
+        }
+
+        .card-ag:hover {
+            box-shadow: 0 15px 35px -10px rgba(234, 179, 8, 0.2);
+        }
+
+        /* Custom Content Group Wrapper */
+        .topic-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        /* Micro-chip Pills */
+        .topic-pill {
+            background-color: var(--bg-dark);
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            cursor: default;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Isolated Micro-Pill Hover Micro-Animations */
+        .card-el .topic-pill:hover {
+            border-color: var(--clr-elicitation);
+            color: #fff;
+            background: rgba(56, 189, 248, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-sp .topic-pill:hover {
+            border-color: var(--clr-specification);
+            color: #fff;
+            background: rgba(168, 85, 247, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-va .topic-pill:hover {
+            border-color: var(--clr-validation);
+            color: #fff;
+            background: rgba(244, 63, 94, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-mn .topic-pill:hover {
+            border-color: var(--clr-management);
+            color: #fff;
+            background: rgba(16, 185, 129, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-mo .topic-pill:hover {
+            border-color: var(--clr-modeling);
+            color: #fff;
+            background: rgba(249, 115, 22, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-tl .topic-pill:hover {
+            border-color: var(--clr-tools);
+            color: #fff;
+            background: rgba(6, 182, 212, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-ag .topic-pill:hover {
+            border-color: var(--clr-agile);
+            color: #fff;
+            background: rgba(234, 179, 8, 0.04);
+            transform: scale(1.02);
+        }
+
+        /* Meta numerical tracking label badge */
+        .meta-counter {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            background: #090d16;
+            border-radius: 20px;
+            color: #94a3b8;
+            border: 1px solid #1e293b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Software Requirement Engineering Lab</h1>
+        <p>Practical Engineering Lab Architecture: Execution Tools, Tracing Artifacts, and Agile Processes</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#elicitation" class="nav-link n-el">1. Elicitation & Analysis</a>
+            <a href="#specification" class="nav-link n-sp">2. Detail Specification</a>
+            <a href="#validation" class="nav-link n-va">3. Validation & Verification</a>
+            <a href="#management" class="nav-link n-mn">4. Tracing Management</a>
+            <a href="#modeling" class="nav-link n-mo">5. Diagram Modeling</a>
+            <a href="#tools" class="nav-link n-tl">6. System Tools</a>
+            <a href="#agile" class="nav-link n-ag">7. Agile Engineering</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+
+        <section id="elicitation" class="section-card card-el">
+            <h2>Requirements Elicitation <span class="meta-counter">4 Strategies</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Stakeholder Interviews</div>
+                <div class="topic-pill">Target Surveys & Questionnaires</div>
+                <div class="topic-pill">Field Observation & Contextual Inquiry</div>
+                <div class="topic-pill">Rapid Prototyping Systems</div>
+            </div>
+        </section>
+
+        <section id="specification" class="section-card card-sp">
+            <h2>Specification in Detail <span class="meta-counter">3 Artifacts</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Writing Clear & Concise Requirements</div>
+                <div class="topic-pill">UML Use Cases Specifications</div>
+                <div class="topic-pill">Agile User Stories Formatting</div>
+            </div>
+        </section>
+
+        <section id="validation" class="section-card card-va">
+            <h2>Validation & Verification <span class="meta-counter">3 Measures</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Completeness Verification</div>
+                <div class="topic-pill">Consistency Checklists</div>
+                <div class="topic-pill">Unambiguous Validation Testing</div>
+            </div>
+        </section>
+
+        <section id="management" class="section-card card-mn">
+            <h2>Requirements Management <span class="meta-counter">3 Controls</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Requirement Tracking Systems</div>
+                <div class="topic-pill">Traceability Matrices (SDLC Linkages)</div>
+                <div class="topic-pill">Scope Change Control Methods</div>
+            </div>
+        </section>
+
+        <section id="modeling" class="section-card card-mo">
+            <h2>Requirements Modeling <span class="meta-counter">3 Diagrams</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Use Case Diagrams</div>
+                <div class="topic-pill">Object / Class Diagrams</div>
+                <div class="topic-pill">State Transition Diagrams</div>
+            </div>
+        </section>
+
+        <section id="tools" class="section-card card-tl">
+            <h2>Engineering Tools <span class="meta-counter">3 Frameworks</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Atlassian JIRA Tracking</div>
+                <div class="topic-pill">Confluence Collaboration Spaces</div>
+                <div class="topic-pill">Unified Modeling Language Tools</div>
+            </div>
+        </section>
+
+        <section id="agile" class="section-card card-ag">
+            <h2>Agile Methodologies <span class="meta-counter">2 Frameworks</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Scrum Framework (Sprints & Delivery)</div>
+                <div class="topic-pill">Kanban Lifecycle Management</div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus: Computer Architecture</title>
+    <style>
+        :root {
+            --bg-dark: #070a13;
+            --card-bg: #111827;
+            --card-hover-border: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #64748b;
+
+            /* High-performance hardware color accents */
+            --clr-perf: #ef4444;
+            /* Ruby Red */
+            --clr-isa: #f59e0b;
+            /* Hardware Amber */
+            --clr-memory: #3b82f6;
+            /* Deep Sapphire Blue */
+            --clr-data: #06b6d4;
+            /* Neon Cyan */
+            --clr-pipe: #10b981;
+            /* Silicon Green */
+            --clr-parallel: #8b5cf6;
+            /* Parallel Violet */
+            --clr-multicore: #ec4899;
+            /* Multi-Core Pink */
+            --clr-io: #6366f1;
+            /* Indigo Bus */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 5rem;
+        }
+
+        /* Ambient subtle grid / gradient header background */
+        header {
+            position: relative;
+            background: linear-gradient(135deg, #1e1b4b 0%, #030712 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #1e293b;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, var(--clr-perf), var(--clr-memory), var(--clr-pipe));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sticky Navigation Architecture */
+        nav {
+            background-color: rgba(7, 10, 19, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid #1e293b;
+            padding: 0.85rem 1rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.65rem;
+        }
+
+        .nav-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.45rem 0.9rem;
+            border-radius: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: #1e293b;
+        }
+
+        /* Nav Accent Bindings */
+        .n-pf {
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .n-is {
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .n-mm {
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .n-dt {
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .n-pp {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .n-pr {
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .n-mc {
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+
+        .n-io {
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        /* Core System Grid Display */
+        .main-container {
+            max-width: 1400px;
+            margin: 3rem auto 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 540px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Computer Architecture Segment Cards */
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 2.2rem;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            scroll-margin-top: 5.5rem;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-hover-border);
+        }
+
+        /* Headings Logic Configuration */
+        .section-card h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Dynamic Custom Color Card Injectors */
+        .card-perf h2 {
+            color: var(--clr-perf);
+            border-bottom-color: rgba(239, 68, 68, 0.15);
+        }
+
+        .card-isa h2 {
+            color: var(--clr-isa);
+            border-bottom-color: rgba(245, 158, 11, 0.15);
+        }
+
+        .card-memory h2 {
+            color: var(--clr-memory);
+            border-bottom-color: rgba(59, 130, 246, 0.15);
+        }
+
+        .card-data h2 {
+            color: var(--clr-data);
+            border-bottom-color: rgba(6, 182, 212, 0.15);
+        }
+
+        .card-pipe h2 {
+            color: var(--clr-pipe);
+            border-bottom-color: rgba(16, 185, 129, 0.15);
+        }
+
+        .card-parallel h2 {
+            color: var(--clr-parallel);
+            border-bottom-color: rgba(139, 92, 246, 0.15);
+        }
+
+        .card-multicore h2 {
+            color: var(--clr-multicore);
+            border-bottom-color: rgba(236, 72, 153, 0.15);
+        }
+
+        .card-io h2 {
+            color: var(--clr-io);
+            border-bottom-color: rgba(99, 102, 241, 0.15);
+        }
+
+        /* Box Glow Enhancements on Card Hover state */
+        .card-perf:hover {
+            box-shadow: 0 15px 35px -10px rgba(239, 68, 68, 0.2);
+        }
+
+        .card-isa:hover {
+            box-shadow: 0 15px 35px -10px rgba(245, 158, 11, 0.2);
+        }
+
+        .card-memory:hover {
+            box-shadow: 0 15px 35px -10px rgba(59, 130, 246, 0.2);
+        }
+
+        .card-data:hover {
+            box-shadow: 0 15px 35px -10px rgba(6, 182, 212, 0.2);
+        }
+
+        .card-pipe:hover {
+            box-shadow: 0 15px 35px -10px rgba(16, 185, 129, 0.2);
+        }
+
+        .card-parallel:hover {
+            box-shadow: 0 15px 35px -10px rgba(139, 92, 246, 0.2);
+        }
+
+        .card-multicore:hover {
+            box-shadow: 0 15px 35px -10px rgba(236, 72, 153, 0.2);
+        }
+
+        .card-io:hover {
+            box-shadow: 0 15px 35px -10px rgba(99, 102, 241, 0.2);
+        }
+
+        /* Layout Elements Group Wrapper */
+        .topic-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        /* Hardware System Microchips */
+        .topic-pill {
+            background-color: var(--bg-dark);
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            cursor: default;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Microchip Hover Action Listeners */
+        .card-perf .topic-pill:hover {
+            border-color: var(--clr-perf);
+            color: #fff;
+            background: rgba(239, 68, 68, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-isa .topic-pill:hover {
+            border-color: var(--clr-isa);
+            color: #fff;
+            background: rgba(245, 158, 11, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-memory .topic-pill:hover {
+            border-color: var(--clr-memory);
+            color: #fff;
+            background: rgba(59, 130, 246, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-data .topic-pill:hover {
+            border-color: var(--clr-data);
+            color: #fff;
+            background: rgba(6, 182, 212, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-pipe .topic-pill:hover {
+            border-color: var(--clr-pipe);
+            color: #fff;
+            background: rgba(16, 185, 129, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-parallel .topic-pill:hover {
+            border-color: var(--clr-parallel);
+            color: #fff;
+            background: rgba(139, 92, 246, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-multicore .topic-pill:hover {
+            border-color: var(--clr-multicore);
+            color: #fff;
+            background: rgba(236, 72, 153, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-io .topic-pill:hover {
+            border-color: var(--clr-io);
+            color: #fff;
+            background: rgba(99, 102, 241, 0.04);
+            transform: scale(1.02);
+        }
+
+        /* Meta metric tracker label badge configuration */
+        .meta-counter {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            background: #070a13;
+            border-radius: 20px;
+            color: #94a3b8;
+            border: 1px solid #1e293b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Computer Architecture</h1>
+        <p>Instruction Set Layouts, Complex Memory Hierarchies, Processor Datapaths, and High-Throughput Hardware
+            Execution Blocks</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#performance" class="nav-link n-pf">1. Performance Metrics</a>
+            <a href="#isa" class="nav-link n-is">2. Instruction Sets (ISA)</a>
+            <a href="#memory" class="nav-link n-mm">3. Memory Hierarchies</a>
+            <a href="#data" class="nav-link n-dt">4. Data Encoding</a>
+            <a href="#pipeline" class="nav-link n-pp">5. Pipelined Datapaths</a>
+            <a href="#parallelism" class="nav-link n-pr">6. ILP Parallelism</a>
+            <a href="#multicore" class="nav-link n-mc">7. Multi-Core Architecture</a>
+            <a href="#io" class="nav-link n-io">8. I/O &amp; Bus Layouts</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+
+        <section id="performance" class="section-card card-perf">
+            <h2>Performance &amp; Core Blocks <span class="meta-counter">2 Main Focuses</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Performance Metrics Execution Layout</div>
+                <div class="topic-pill">Fundamental Architectural Blocks of Computer</div>
+            </div>
+        </section>
+
+        <section id="isa" class="section-card card-isa">
+            <h2>Instruction Set Architecture <span class="meta-counter">6 Key Modules</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Classifying Instruction Set Architectures</div>
+                <div class="topic-pill">Register Files &amp; Storage Layouts</div>
+                <div class="topic-pill">Addressing Modes (Direct, Indirect, Offset)</div>
+                <div class="topic-pill">RISC versus CISC Architectures</div>
+                <div class="topic-pill">x86 Architecture Overview</div>
+                <div class="topic-pill">ARM Processor Architecture</div>
+            </div>
+        </section>
+
+        <section id="memory" class="section-card card-memory">
+            <h2>Memory Hierarchy &amp; Cache <span class="meta-counter">11 Core Concepts</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Hierarchical System Organization</div>
+                <div class="topic-pill">Cache Memory Foundations</div>
+                <div class="topic-pill">Basic Cache Structures and Designs</div>
+                <div class="topic-pill">Direct-Mapped Cache Structures</div>
+                <div class="topic-pill">Fully Associative &amp; Set Associative Mapping</div>
+                <div class="topic-pill">Analyzing Cache Effectiveness &amp; Miss Ratios</div>
+                <div class="topic-pill">Cache Replacement Policies (LRU, FIFO)</div>
+                <div class="topic-pill">Cache Write Policies (Write-Through / Write-Back)</div>
+                <div class="topic-pill">Multiple Level Caches Layout</div>
+                <div class="topic-pill">Main Memory Subsystem Upgrades</div>
+                <div class="topic-pill">Virtual Memory Engineering, Paging &amp; Translation</div>
+            </div>
+        </section>
+
+        <section id="data" class="section-card card-data">
+            <h2>Data Representation <span class="meta-counter">5 Classifications</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Data Type Representation Layouts</div>
+                <div class="topic-pill">Signed Number Encoding Schemes</div>
+                <div class="topic-pill">Fixed Point Computational Formats</div>
+                <div class="topic-pill">IEEE 754 Floating Point Representation</div>
+                <div class="topic-pill">Character Encoding Formats</div>
+            </div>
+        </section>
+
+        <section id="pipeline" class="section-card card-pipe">
+            <h2>Processor Datapath &amp; Pipelining <span class="meta-counter">7 Key Components</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Processor Single-Cycle Datapath Design</div>
+                <div class="topic-pill">Pipelined Datapath Hardware Structuring</div>
+                <div class="topic-pill">Pipelining Basics &amp; Stage Implementations</div>
+                <div class="topic-pill">Stalling and Hazard Interlock Management</div>
+                <div class="topic-pill">Forwarding and Bypass Hardware Links</div>
+                <div class="topic-pill">Throughput and Speedup Optimization Mechanics</div>
+                <div class="topic-pill">Pipelining Hazards (Structural, Data, Control)</div>
+            </div>
+        </section>
+
+        <section id="parallelism" class="section-card card-parallel">
+            <h2>Instruction Level Parallelism <span class="meta-counter">5 Advanced Topics</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Instruction Level Parallelism (ILP)</div>
+                <div class="topic-pill">ILP Challenges and Physical Limitations</div>
+                <div class="topic-pill">Scalar versus Superscalar Pipeling Architectures</div>
+                <div class="topic-pill">Dynamic Branch Prediction &amp; Speculative Execution</div>
+                <div class="topic-pill">Uniprocessor System Throughput Acceleration</div>
+            </div>
+        </section>
+
+        <section id="multicore" class="section-card card-multicore">
+            <h2>Multi-Core &amp; Multiprocessors <span class="meta-counter">4 Structural Sets</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Flynn’s Taxonomy: SISD, SIMD, and MIMD</div>
+                <div class="topic-pill">Centralized Shared Memory Architecture Layouts</div>
+                <div class="topic-pill">Distributed Shared Memory Frameworks</div>
+                <div class="topic-pill">Multi-core Processor Interconnect Architectures</div>
+            </div>
+        </section>
+
+        <section id="io" class="section-card card-io">
+            <h2>Input / Output Subsystems <span class="meta-counter">4 Key Architectures</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">I/O Performance Measures &amp; Bandwidth</div>
+                <div class="topic-pill">Types of I/O Devices &amp; Signaling Interfaces</div>
+                <div class="topic-pill">System Buses and Structural Interfacing to CPU</div>
+                <div class="topic-pill">RAID Subsystem Architectures (RAID 0 through 6)</div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+</html>

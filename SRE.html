@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus: Software Requirement Engineering</title>
+    <style>
+        :root {
+            --bg-dark: #0b0f19;
+            --card-bg: #151d30;
+            --card-hover-border: #334155;
+            --text-main: #f1f5f9;
+            --text-muted: #64748b;
+
+            /* High-vibrancy engineering accents */
+            --clr-intro: #06b6d4;
+            /* Cyber Cyan */
+            --clr-detail: #a855f7;
+            /* Tech Purple */
+            --clr-advanced: #f97316;
+            /* Engineering Orange */
+            --clr-formal: #10b981;
+            /* Logical Green */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 5rem;
+        }
+
+        /* Ambient glowing background header */
+        header {
+            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #070a12 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #1e293b;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.08) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, var(--clr-intro), var(--clr-detail), var(--clr-advanced));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sticky Navigation Bar */
+        nav {
+            background-color: rgba(11, 15, 25, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid #1e293b;
+            padding: 0.85rem 1rem;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .nav-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: #1e293b;
+        }
+
+        /* Navigation item borders matching domains */
+        .n-intro {
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+
+        .n-detail {
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .n-advanced {
+            border-color: rgba(249, 115, 22, 0.3);
+        }
+
+        .n-formal {
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        /* Multi-column layout container */
+        .main-container {
+            max-width: 1400px;
+            margin: 3rem auto 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 540px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Domain Module Cards */
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 2.2rem;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            scroll-margin-top: 5.5rem;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-hover-border);
+        }
+
+        /* Card Header Section */
+        .section-card h2 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Domain coloring applications */
+        .card-intro h2 {
+            color: var(--clr-intro);
+            border-bottom-color: rgba(6, 182, 212, 0.15);
+        }
+
+        .card-detail h2 {
+            color: var(--clr-detail);
+            border-bottom-color: rgba(168, 85, 247, 0.15);
+        }
+
+        .card-advanced h2 {
+            color: var(--clr-advanced);
+            border-bottom-color: rgba(249, 115, 22, 0.15);
+        }
+
+        .card-formal h2 {
+            color: var(--clr-formal);
+            border-bottom-color: rgba(16, 185, 129, 0.15);
+        }
+
+        /* Outer Glow adjustments on Card Hover */
+        .card-intro:hover {
+            box-shadow: 0 15px 35px -10px rgba(6, 182, 212, 0.25);
+        }
+
+        .card-detail:hover {
+            box-shadow: 0 15px 35px -10px rgba(168, 85, 247, 0.25);
+        }
+
+        .card-advanced:hover {
+            box-shadow: 0 15px 35px -10px rgba(249, 115, 22, 0.25);
+        }
+
+        .card-formal:hover {
+            box-shadow: 0 15px 35px -10px rgba(16, 185, 129, 0.25);
+        }
+
+        /* Micro-badge item flexbox wrapper */
+        .topic-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        /* Interactive dynamic pills */
+        .topic-pill {
+            background-color: var(--bg-dark);
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.92rem;
+            color: #cbd5e1;
+            cursor: default;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Custom Hover animations per container block */
+        .card-intro .topic-pill:hover {
+            border-color: var(--clr-intro);
+            color: #fff;
+            background: rgba(6, 182, 212, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-detail .topic-pill:hover {
+            border-color: var(--clr-detail);
+            color: #fff;
+            background: rgba(168, 85, 247, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-advanced .topic-pill:hover {
+            border-color: var(--clr-advanced);
+            color: #fff;
+            background: rgba(249, 115, 22, 0.04);
+            transform: scale(1.02);
+        }
+
+        .card-formal .topic-pill:hover {
+            border-color: var(--clr-formal);
+            color: #fff;
+            background: rgba(16, 185, 129, 0.04);
+            transform: scale(1.02);
+        }
+
+        /* Meta numeric badge indicators */
+        .meta-counter {
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.25rem 0.65rem;
+            background: #0b0f19;
+            border-radius: 20px;
+            color: #94a3b8;
+            border: 1px solid #1e293b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Software Requirement Engineering</h1>
+        <p>Elicitation, Validation, Object Models, Specification Frameworks, and Formal Specifications</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#intro" class="nav-link n-intro">1. Introduction Fundamentals</a>
+            <a href="#detail" class="nav-link n-detail">2. Requirements Analysis in Detail</a>
+            <a href="#advanced" class="nav-link n-advanced">3. Advanced Engineering Topics</a>
+            <a href="#formal" class="nav-link n-formal">4. Formal Methods Framework</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+
+        <section id="intro" class="section-card card-intro">
+            <h2>Introduction Fundamentals <span class="meta-counter">9 Modules</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">The Business Case for Requirements Analysis</div>
+                <div class="topic-pill">Requirements Analysis through Software Life Cycles</div>
+                <div class="topic-pill">Requirements Analysis based on Nature of Development</div>
+                <div class="topic-pill">Requirement Specification</div>
+                <div class="topic-pill">Quality Assurance Methods</div>
+                <div class="topic-pill">The Nature of Meetings</div>
+                <div class="topic-pill">Understanding Requirements</div>
+                <div class="topic-pill">System Planning Approaches</div>
+                <div class="topic-pill">Requirements Validation and Testing</div>
+            </div>
+        </section>
+
+        <section id="detail" class="section-card card-detail">
+            <h2>Requirements Analysis in Detail <span class="meta-counter">6 Areas</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">System Scope Models</div>
+                <div class="topic-pill">Universal Modeling Language (UML)</div>
+                <div class="topic-pill">The Requirements Document</div>
+                <div class="topic-pill">The Specifications Document</div>
+                <div class="topic-pill">Software Tools Assisting Requirements Development</div>
+                <div class="topic-pill">Specification Development Support Systems</div>
+            </div>
+        </section>
+
+        <section id="advanced" class="section-card card-advanced">
+            <h2>Advanced Engineering Topics <span class="meta-counter">5 Classifications</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">User Interface Design</div>
+                <div class="topic-pill">Data Flow Modeling</div>
+                <div class="topic-pill">Viewpoint Oriented Requirements Methods</div>
+                <div class="topic-pill">Non-Functional Requirements: Performance</div>
+                <div class="topic-pill">Non-Functional Requirements: Safety Critical Systems</div>
+            </div>
+        </section>
+
+        <section id="formal" class="section-card card-formal">
+            <h2>Formal Methods Framework <span class="meta-counter">5 Key Elements</span></h2>
+            <div class="topic-group">
+                <div class="topic-pill">Introduction to Formal Methods</div>
+                <div class="topic-pill">Formal Methods in Industrial Applications</div>
+                <div class="topic-pill">Underpinnings of Formal Methods</div>
+                <div class="topic-pill">Z Specification Language</div>
+                <div class="topic-pill">B-Method Specification Framework</div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+</html>
