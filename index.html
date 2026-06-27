@@ -40,7 +40,7 @@
             font-size: 3.5rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #fffeff;
+            color: #ffffff;
             margin-bottom: 10px;
             transform: perspective(500px) rotateX(10deg);
             text-shadow:
@@ -50,9 +50,28 @@
                 0 0 40px var(--default-neon),
                 0 5px 0 #4e4848,
                 0 10px 10px rgba(0, 0, 0, 0.5);
-            animation: flicker 1s infinite alternate,
-                float 2s ease-in-out infinite,
-                lightning-strike 3s infinite;
+            animation: flicker 3s infinite alternate,
+                float 5s ease-in-out infinite,
+                lightning-strike 7s infinite;
+        }
+
+        header p1 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #f7f7f7;
+            margin-bottom: 10px;
+            transform: perspective(500px) rotateX(10deg);
+            text-shadow:
+                0 0 10px #e81675f3,
+                0 0 20px rgb(2, 244, 71),
+                0 0 30px rgb(12, 67, 209),
+                0 0 40px var(--default-neon),
+                0 5px 0 #4e4848,
+                0 10px 10px rgba(0, 0, 0, 0.5);
+            animation: flicker 3s infinite alternate,
+                float 5s ease-in-out infinite,
+                lightning-strike 7s infinite;
         }
 
         @keyframes lightning-strike {
@@ -250,7 +269,7 @@
     <div class="container">
         <header>
             <h1>Software Engineering 2-1</h1>
-            <p>Comprehensive Academic Course Dashboard</p>
+            <p1>Academic Course Dashboard</p1>
         </header>
 
         <div class="grid">
