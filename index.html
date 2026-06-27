@@ -11,6 +11,8 @@
             --card-bg: #101620;
             --text-color: #f1f5f9;
             --sub-text: #94a3b8;
+            /* এখানে ডিফল্ট নিয়ন রঙ যোগ করা হয়েছে */
+            --default-neon: #00f2ff;
         }
 
         body {
@@ -34,8 +36,7 @@
             margin-bottom: 70px;
         }
 
-        /* 3D Glowing Title Animation */
-        h1 {
+        header h1 {
             font-size: 3.5rem;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -44,15 +45,14 @@
             transform: perspective(500px) rotateX(10deg);
             text-shadow:
                 0 0 10px #c331739a,
-                0 0 20px var(--default-neon),
+                0 0 20px orange,
+                0 0 30px yellow,
                 0 0 40px var(--default-neon),
                 0 5px 0 #4e4848,
                 0 10px 10px rgba(0, 0, 0, 0.5);
-            /* Added lightning-strike here */
             animation: flicker 1s infinite alternate,
                 float 2s ease-in-out infinite,
                 lightning-strike 3s infinite;
-
         }
 
         @keyframes lightning-strike {
@@ -92,7 +92,7 @@
             54%,
             56%,
             100% {
-                text-shadow: 0 0 10px #fff, 0 0 20px var(--default-neon), 0 0 40px var(--default-neon), 0 5px 0 #333;
+                text-shadow: 0 0 10px #fff, 0 0 20px orange, 0 0 30px yellow, 0 0 40px var(--default-neon), 0 5px 0 #333;
             }
 
             20%,
@@ -201,9 +201,9 @@
             color: var(--dark-bg);
         }
 
+        /* কার্ডের রঙসমূহ */
         .c1 {
             --card-neon: #00f2ff;
-            --default-neon: #00f2ff;
         }
 
         .c2 {
