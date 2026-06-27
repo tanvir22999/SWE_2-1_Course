@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUS-2101w Course Dashboard</title>
+    <style>
+        :root {
+            --neon-blue: #00f2ff;
+            --dark-bg: #0a0e14;
+            --card-bg: #151c26;
+            --text-color: #e0e6ed;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            margin-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 0 25px var(--neon-blue);
+            transform: scale(1.02);
+        }
+
+        .card h3 {
+            color: var(--neon-blue);
+            margin-top: 0;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            background: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+        }
+
+        .info-box {
+            margin-top: 40px;
+            padding: 20px;
+            border: 2px dashed var(--neon-blue);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard">
+        <header>
+            <h1>Cost and Management Accounting</h1>
+            <p class="meta">Department of Business Administration | Session: 2024-25 [cite: 2, 3]</p>
+            <p>Course Code: BUS-04112101W [cite: 4]</p>
+        </header>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Introduction to Cost Accounting</h3>
+                <p>Exercises: Question 1, 2, 3, 4, 7, 12, 13, 14 [Basu and Das]</p>
+                <a href="#" class="btn">View Chapter</a>
+            </div>
+            <div class="card">
+                <h3>Elements of Cost & Cost Sheet</h3>
+                <p>Exercises: P1, P2, 5, 7, 8, 12, 15, 20,E2, 3, 4, 5, 6, 7, 8, 9, 11 [Basu and Das]</p>
+                <a href="#" class="btn">View Chapter</a>
+            </div>
+            <div class="card">
+                <h3>Costing and Control Material</h3>
+                <p>Illustration 1,2,3,p1,2,4,14,17,31(sheet on 4 example) FIFO/LIFO worksheets [Basu and Das /cost
+                    Accounting only material]</p>
+                <a href="#" class="btn">View Chapter</a>
+            </div>
+            <div class="card">
+                <h3>Costing and Control of Labor</h3>
+                <p>Illustration 1 Page 219, P1, 2,3,5,12, Exercise,3,8,10,22 [Basu and Das]</p>
+                <a href="#" class="btn">View Chapter</a>
+            </div>
+            <div class="card">
+                <h3>Overhead</h3>
+                <p>Page 215 SE 1, 2, 3, 11, 12 Exercise,1,4,7 [Cost accountin only material]</p>
+                <a href="#" class="btn">View Chapter</a>
+            </div>
+            <div class="card">
+                <h3>Management Accounting & Cost Concepts</h3>
+                <p>Page 2-7, 28-43, review P1, P2 , foundation 15, Exercise 2-5, 2-6, 11,[Garrison Chapter 2 and Sheet]
+                </p>
+                <a href="#" class="btn">View Chapter</a>
+            </div>
+            <div class="card">
+                <h3>Cost Behavior Analysis</h3>
+                <p>SE 1-46, 9, 11, Ex 1, 2, 3, 4 [Cost accounting (S. Ahmed and M.F, Omer)]</p>
+                <a href="#" class="btn">View Chapter</a>
+            </div>
+            <div class="card">
+                <h3>Cost Volume Profit Relationship</h3>
+                <p>Review Problem, E 1, 2, 4, 5, 6, 9 [Garrison Chapter 5]</p>
+                <a href="#" class="btn">View Chapter</a>
+            </div>
+            <div class="card">
+                <h3>Budget</h3>
+                <p>Theory and Review Problems [Garrison Chapter 8]</p>
+                <a href="#" class="btn">View Chapter</a>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <h4>Important Notes:</h4>
+            <ul>
+                <li>Students must submit two term papers: (1) Elements of Cost & Cost Sheet; (2) Cost Behavior Analysis
+                    & CVP Relationship[cite: 7].</li>
+                <li>All students must bring class materials to every session[cite: 8].</li>
+                <li>Reference books: *Theory and Practice of Costing* (Basu and Das) and *Managerial Accounting*
+                    (Garrison, Noreen and Brewer)[cite: 5].</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>
