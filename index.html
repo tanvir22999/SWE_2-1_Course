@@ -39,17 +39,20 @@
             font-size: 3.5rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #fff;
+            color: #fffeff;
             margin-bottom: 10px;
             transform: perspective(500px) rotateX(10deg);
             text-shadow:
-                0 0 10px #fff,
+                0 0 10px #c331739a,
                 0 0 20px var(--default-neon),
                 0 0 40px var(--default-neon),
-                0 5px 0 #333,
+                0 5px 0 #4e4848,
                 0 10px 10px rgba(0, 0, 0, 0.5);
             /* Added lightning-strike here */
-            animation: flicker 3s infinite alternate, float 4s ease-in-out infinite, lightning-strike 6s infinite;
+            animation: flicker 1s infinite alternate,
+                float 2s ease-in-out infinite,
+                lightning-strike 3s infinite;
+
         }
 
         @keyframes lightning-strike {
