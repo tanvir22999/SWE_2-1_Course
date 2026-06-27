@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Course SWE 2-1</title>
+    <style>
+        :root {
+            --bg-dark: #070a13;
+            --card-bg: #111827;
+            --card-hover-border: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+
+            /* Course Identity Color Matrix (Sob Course er Jonne Alada Rong) */
+            --clr-sre: #38bdf8;
+            /* Electric Sky Blue */
+            --clr-arch: #ef4444;
+            /* Ruby Hardware Red */
+            --clr-oop-core: #10b981;
+            /* Silicon Green */
+            --clr-java: #a855f7;
+            /* High-Volt Java Purple */
+            --clr-prob: #f97316;
+            /* Math Orange */
+            --clr-eco: #eab308;
+            /* Economics Gold/Yellow */
+            --clr-cma: #14b8a6;
+            /* Accounting Teal/Mint */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Tech Header Matrix */
+        header {
+            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #030712 100%);
+            padding: 5rem 2rem 4rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #1e293b;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, var(--clr-sre), var(--clr-java), var(--clr-cma));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.85rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Central Hub Grid Layout */
+        .main-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            flex-grow: 1;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                margin: 2rem auto;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Link Module Cards (Attractive Button Style) */
+        .course-card {
+            background-color: var(--card-bg);
+            border: 2px solid #1e293b;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Card Hover Effects */
+        .course-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--card-hover-border);
+            background-color: #172033;
+        }
+
+        /* Card Header Typography */
+        .course-card h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .course-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            flex-grow: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Bottom Launch Button Indicator */
+        .launch-btn {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: auto;
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .launch-btn::after {
+            content: '→';
+            font-size: 1.2rem;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Launch Button Hover Animation */
+        .course-card:hover .launch-btn {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .course-card:hover .launch-btn::after {
+            transform: translateX(8px);
+        }
+
+        /* Theme Color Mapping Injections (Ronger Setting) */
+        .card-sre h2,
+        .card-sre .launch-btn {
+            color: var(--clr-sre);
+        }
+
+        .card-arch h2,
+        .card-arch .launch-btn {
+            color: var(--clr-arch);
+        }
+
+        .card-oop h2,
+        .card-oop .launch-btn {
+            color: var(--clr-oop-core);
+        }
+
+        .card-java h2,
+        .card-java .launch-btn {
+            color: var(--clr-java);
+        }
+
+        .card-prob h2,
+        .card-prob .launch-btn {
+            color: var(--clr-prob);
+        }
+
+        .card-eco h2,
+        .card-eco .launch-btn {
+            color: var(--clr-eco);
+        }
+
+        .card-cma h2,
+        .card-cma .launch-btn {
+            color: var(--clr-cma);
+        }
+
+        /* Specific Neon Glowing Box-Shadow Implementations */
+        .card-sre:hover {
+            box-shadow: 0 20px 40px -10px rgba(56, 189, 248, 0.3);
+            border-color: var(--clr-sre);
+        }
+
+        .card-arch:hover {
+            box-shadow: 0 20px 40px -10px rgba(239, 68, 68, 0.3);
+            border-color: var(--clr-arch);
+        }
+
+        .card-oop:hover {
+            box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.3);
+            border-color: var(--clr-oop-core);
+        }
+
+        .card-java:hover {
+            box-shadow: 0 20px 40px -10px rgba(168, 85, 247, 0.3);
+            border-color: var(--clr-java);
+        }
+
+        .card-prob:hover {
+            box-shadow: 0 20px 40px -10px rgba(249, 115, 22, 0.3);
+            border-color: var(--clr-prob);
+        }
+
+        .card-eco:hover {
+            box-shadow: 0 20px 40px -10px rgba(234, 179, 8, 0.3);
+            border-color: var(--clr-eco);
+        }
+
+        .card-cma:hover {
+            box-shadow: 0 20px 40px -10px rgba(20, 184, 166, 0.3);
+            border-color: var(--clr-cma);
+        }
+
+        /* Structural Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid #1e293b;
+            background-color: #05070d;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Software Engineering Course 2-1</h1>
+        <p>OOP,CP,SRS,SRE, Probability, Computer Architecture, Cost and Management Accounting, Economics. </p>
+    </header>
+
+    <main class="main-container">
+        <a href="SRE.html" class="course-card card-sre">
+            <h2>Software Requirement Engineering</h2>
+            <p> Introduction Fundamental ,Requirements Analysis in Detail
+                ,Advanced Engineering Topics
+                Formal Methods Framework</p>
+            <div class="launch-btn">Open Syllabus</div>
+        </a>
+
+        <a href="SRS_Lab.html" class="course-card card-sre">
+            <h2>Software Requirement Engineering Lab</h2>
+            <p>Elicitation strategies, specifications, lifecycle tracing validation matrices, UML system models, JIRA
+                management, and agile delivery frameworks.</p>
+            <div class="launch-btn">Open Syllabus</div>
+        </a>
+
+        <a href="Computer_Architecture.html" class="course-card card-arch">
+            <h2>Computer Architecture</h2>
+            <p>Instruction Set Architectures (ISA), complex cache/memory mapping, pipelined datapath hazard tracking,
+                instruction-level parallelism.</p>
+            <div class="launch-btn">Open Syllabus</div>
+        </a>
+        <a href="Competitive_Programminig.html" class="course-card card-arch">
+            <h2>Competitive Programminig</h2>
+            <p>Data Structures
+                String Processing ,Game Theory ,Combinatorics & Prob, Number Theory ,Basic Math ,Basic Geometry
+                ,Dynamic Programming</p>
+            <div class="launch-btn">Open Syllabus</div>
+        </a>
+
+        <a href="OOP.html" class="course-card card-oop">
+            <h2>Object Oriented Programming</h2>
+            <p>Fundamental design structures, encapsulation safeguards, polymorphic behaviors, abstraction rules, custom
+                memory execution, and SOLID modular principles.</p>
+            <div class="launch-btn">Open Syllabus</div>
+        </a>
+        <a href="OOP_Lab.html" class="course-card card-oop">
+            <h2>Object Oriented Programming Lab</h2>
+            <p>Fundamental design structures, encapsulation safeguards, polymorphic behaviors, abstraction rules, custom
+                memory execution, and SOLID modular principles.</p>
+            <div class="launch-btn">Open Syllabus</div>
+        </a>
+
+        <a href="probability_syllabus.html" class="course-card card-prob">
+            <h2>Probability & Distributions</h2>
+            <p>Axiomatic calculations, conditional Bayes updating laws, moment generating operations, along with
+                detailed univariate discrete & bivariate vector surfaces.</p>
+            <div class="launch-btn">Open Syllabus</div>
+        </a>
+
+        <a href="ECO.html" class="course-card card-eco">
+            <h2>Economics</h2>
+            <p>Core economic principles, micro & macro economics, supply-demand curves, market structures, and financial
+                policy analysis.</p>
+            <div class="launch-btn">Open Syllabus</div>
+        </a>
+
+        <a href="CMA.html" class="course-card card-cma">
+            <h2>Cost & Management Accounting</h2>
+            <p>Cost classification, break-even analysis, budgeting, variance tracking, and strategic financial
+                decision-making for management.</p>
+            <div class="launch-btn">Open Syllabus</div>
+        </a>
+
+    </main>
+
+    <footer>
+        <p>Software Engineering Dashboard &bull; Advanced Academic Blueprint</p>
+    </footer>
+
+</body>
+
+</html>
