@@ -44,9 +44,9 @@
             margin-bottom: 10px;
             transform: perspective(500px) rotateX(10deg);
             text-shadow:
-                0 0 10px #c331739a,
-                0 0 20px orange,
-                0 0 30px yellow,
+                0 0 10px #2c1fe1d9,
+                0 0 20px rgb(14, 255, 215),
+                0 0 30px rgba(26, 223, 56, 0.993),
                 0 0 40px var(--default-neon),
                 0 5px 0 #4e4848,
                 0 10px 10px rgba(0, 0, 0, 0.5);
@@ -55,8 +55,28 @@
                 lightning-strike 7s infinite;
         }
 
-        header p1 {
+        header p1,
+        p2 {
             font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            transform: perspective(500px) rotateX(10deg);
+            text-shadow:
+                0 0 10px #20f108f4,
+                0 0 20px rgb(244, 2, 2),
+                0 0 30px rgb(10, 77, 248),
+                0 0 40px var(--default-neon),
+                0 5px 0 #4e4848,
+                0 10px 10px rgba(0, 0, 0, 0.5);
+            animation: flicker 3s infinite alternate,
+                float 5s ease-in-out infinite,
+                lightning-strike 7s infinite;
+        }
+
+        footer p {
+            font-size: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #f7f7f7;
@@ -69,9 +89,6 @@
                 0 0 40px var(--default-neon),
                 0 5px 0 #4e4848,
                 0 10px 10px rgba(0, 0, 0, 0.5);
-            animation: flicker 3s infinite alternate,
-                float 5s ease-in-out infinite,
-                lightning-strike 7s infinite;
         }
 
         @keyframes lightning-strike {
@@ -202,6 +219,7 @@
             margin-bottom: 25px;
             flex-grow: 1;
             line-height: 1.6;
+
         }
 
         .btn {
@@ -210,14 +228,40 @@
             padding: 12px;
             border: 1px solid var(--card-neon);
             color: var(--card-neon);
-            border-radius: 6px;
+            border-radius: 15px;
             font-weight: bold;
+            margin-bottom: 20px;
+            color: #f7f7f7;
+            transform: perspective(500px) rotateX(10deg);
+            text-shadow:
+                0 0 10px #e81675f3,
+                0 0 20px rgb(2, 244, 71),
+                0 0 30px rgb(12, 67, 209),
+                0 0 40px var(--default-neon),
+                0 5px 0 #4e4848,
+                0 10px 10px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
         }
 
         .card:hover .btn {
             background: var(--card-neon);
             color: var(--dark-bg);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #f7f7f7;
+            margin-bottom: 10px;
+            transform: perspective(500px) rotateX(10deg);
+            text-shadow:
+                0 0 10px #e81675f3,
+                0 0 20px rgb(2, 244, 71),
+                0 0 30px rgb(12, 67, 209),
+                0 0 40px var(--default-neon),
+                0 5px 0 #4e4848,
+                0 10px 10px rgba(0, 0, 0, 0.5);
+            animation: flicker 3s infinite alternate,
+                float 5s ease-in-out infinite,
+                lightning-strike 7s infinite;
         }
 
         /* কার্ডের রঙসমূহ */
@@ -270,6 +314,8 @@
         <header>
             <h1>Software Engineering 2-1</h1>
             <p1>Academic Course Dashboard</p1>
+            <p>
+                <p2>SWE 24</p2>
         </header>
 
         <div class="grid">
@@ -330,7 +376,7 @@
         </div>
 
         <footer>
-            <p>Software Engineering Dashboard &bull; Academic Year 2026</p>
+            <p>Software Engineering Dashboard - SWE 24</p>
         </footer>
     </div>
 </body>
